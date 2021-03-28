@@ -1,0 +1,35 @@
+//tell the file that we will be using proto3 coding
+syntax = "proto3";
+
+//specify the options for the service
+option java_multiple_files = true;
+option java_package = "fireservice";
+option java_outer_classname = "fire2ServiceImpl";
+
+//Specify the package
+package fire;
+
+//specify the service and the RPC services allowed
+service fire{ 
+    rpc contactFire(contactFireRequest) returns (fireResponse);
+    rpc emergencyFire(fireEmergency) returns (stream fireResponseStream);
+}
+
+//detail the requirements for the RPC service
+message contactFireRequest{
+    string text = 1;
+}
+message fireResponse{
+    string value = 1;
+}
+
+//detail the requirements for the RPC service
+message fireEmergency{
+    string name = 1;
+    string injury = 2;
+    string address = 3;
+    string priority = 4; 
+}
+message fireResponseStream{
+    string text = 1;
+}
